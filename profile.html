@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Profile Photo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .info-box {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        .info-box h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        .info-box p {
+            margin: 8px 0;
+            font-size: 0.95rem;
+        }
+        .instructions {
+            list-style: none;
+            padding: 0;
+        }
+        .instructions li {
+            padding: 10px;
+            background: #fffbea;
+            margin: 8px 0;
+            border-left: 4px solid #667eea;
+            text-align: left;
+            color: #333;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+            font-weight: bold;
+        }
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📸 Setup Foto Profil</h1>
+        <p>Atur foto profil Anda untuk portfolio</p>
+        
+        <div class="info-box">
+            <h3>Petunjuk Penggunaan:</h3>
+            <ul class="instructions">
+                <li>✅ Siapkan foto profil Anda (JPG, PNG)</li>
+                <li>✅ Letakkan file dengan nama <strong>profile.jpg</strong></li>
+                <li>✅ Simpan di folder yang sama dengan Index.html</li>
+                <li>✅ Ukuran optimal: 300x300px atau lebih</li>
+                <li>✅ Refresh halaman portfolio untuk melihat perubahan</li>
+            </ul>
+        </div>
+
+        <div class="info-box" style="background: #e3f2fd;">
+            <h3>Format File yang Didukung:</h3>
+            <p>
+                • <strong>profile.jpg</strong> (Recommended)<br>
+                • profile.png<br>
+                • profile.webp<br>
+                • profile.jpeg
+            </p>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-secondary" onclick="generatePlaceholder()">Generate Placeholder</button>
+            <button class="btn-primary" onclick="goBack()">Kembali ke Portfolio</button>
+        </div>
+    </div>
+
+    <script>
+        function generatePlaceholder() {
+            // Create a canvas with gradient background and initials
+            const canvas = document.createElement('canvas');
+            const size = 320;
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+
+            // Gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+
+            // Draw circle background
+            ctx.fillStyle = 'rgba(255,255,255,0.15)';
+            ctx.beginPath();
+            ctx.arc(size / 2, size / 2, size / 2.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Draw initials
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 120px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('AS', size / 2, size / 2);
+
+            // Download
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'profile.jpg';
+                a.click();
+                alert('Placeholder photo berhasil diunduh! Simpan sebagai profile.jpg di folder portfolio Anda.');
+            }, 'image/jpeg', 0.95);
+        }
+
+        function goBack() {
+            window.location.href = 'Index.html';
+        }
+    </script>
+</body>
+</html>
